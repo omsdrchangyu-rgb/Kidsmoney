@@ -1,0 +1,23 @@
+{
+  "name": "存錢罐",
+  "short_name": "存錢罐",
+  "lang": "zh-Hant-TW",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf3e6",
+  "theme_color": "#fbf3e6",
+  "icons": [
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

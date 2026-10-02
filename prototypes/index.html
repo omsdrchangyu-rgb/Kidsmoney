@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>存錢罐風格選擇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #f4efe6; --fg: #3b2f28; --muted: #7a6a5e; --card: #fffaf2; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #1d1a17; --fg: #f1e9df; --muted: #b3a597; --card: #2a2622; } }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: 'Iansui', 'PingFang TC', sans-serif; padding: 28px 16px 48px; }
+  h1 { text-align: center; font-size: 34px; font-weight: 400; }
+  p.hint { text-align: center; color: var(--muted); margin: 8px 0 26px; font-size: 17px; }
+  .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
+  .opt { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .phone {
+    width: 300px; height: 650px; border-radius: 44px; padding: 10px; background: #111;
+    box-shadow: 0 20px 40px rgba(0,0,0,.25), inset 0 0 0 2px #333; position: relative; overflow: hidden;
+  }
+  .phone iframe { width: 390px; height: 844px; border: 0; border-radius: 44px; transform: scale(.7179); transform-origin: 0 0; background: #000; }
+  .name { font-size: 26px; }
+  .name b { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--fg); color: var(--bg); font-weight: 400; margin-right: 8px; }
+  a.open { color: var(--fg); background: var(--card); padding: 8px 18px; border-radius: 99px; text-decoration: none; font-size: 17px; box-shadow: 0 2px 0 rgba(0,0,0,.12); }
+  @media (max-width: 680px) { .phone { display: none; } .opt { width: 100%; max-width: 360px; flex-direction: row; justify-content: space-between; background: var(--card); padding: 16px 18px; border-radius: 20px; } }
+</style>
+</head>
+<body>
+  <h1>選一個風格</h1>
+  <p class="hint">點硬幣投錢・左右滑換罐子・三個版本共用同一份存款</p>
+  <div class="row">
+    <div class="opt">
+      <div class="phone"><iframe src="a-chalkboard.html" title="A 黑板粉筆"></iframe></div>
+      <div class="name"><b>A</b>黑板粉筆</div>
+      <a class="open" href="a-chalkboard.html">全螢幕開啟</a>
+    </div>
+    <div class="opt">
+      <div class="phone"><iframe src="b-crayon.html" title="B 繪本蠟筆"></iframe></div>
+      <div class="name"><b>B</b>繪本蠟筆</div>
+      <a class="open" href="b-crayon.html">全螢幕開啟</a>
+    </div>
+    <div class="opt">
+      <div class="phone"><iframe src="c-lockscreen.html" title="C 鎖定畫面"></iframe></div>
+      <div class="name"><b>C</b>鎖定畫面</div>
+      <a class="open" href="c-lockscreen.html">全螢幕開啟</a>
+    </div>
+  </div>
+</body>
+</html>

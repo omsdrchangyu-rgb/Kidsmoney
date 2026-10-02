@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fcf3e2">
+<title>存錢罐 B 繪本蠟筆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/base.css">
+<style>
+  :root { --ink: #5b4636; --paper: #fcf3e2; }
+  body {
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(255,214,120,.35), transparent 28%),
+      radial-gradient(circle at 92% 92%, rgba(140,200,240,.25), transparent 32%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .32  0 0 0 0 .2  0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    color: var(--ink);
+  }
+  /* 繪本小插圖：太陽、雲、草地 */
+  .deco { position: fixed; z-index: 0; pointer-events: none; }
+  .sun { right: -18px; top: calc(env(safe-area-inset-top, 0px) + 8px); width: 96px; }
+  .cloud { left: 14px; top: calc(env(safe-area-inset-top, 0px) + 112px); width: 74px; opacity: .9; }
+  .grass {
+    left: 0; right: 0; bottom: 0; height: calc(env(safe-area-inset-bottom, 0px) + 150px);
+    background:
+      radial-gradient(120% 60px at 50% 0, #bfe3a4 70%, transparent 71%) 0 0 / 100% 100% no-repeat,
+      #bfe3a4;
+    box-shadow: inset 0 3px 0 rgba(91,70,54,.75);
+    border-radius: 50% 50% 0 0 / 40px 40px 0 0;
+  }
+  #title { font-size: 52px; }
+  #title .ttl {
+    padding: 0 10px 4px;
+    background: linear-gradient(transparent 62%, rgba(255,210,94,.75) 62%, rgba(255,210,94,.75) 88%, transparent 88%);
+  }
+  #dots i { background: var(--ink); }
+  .round {
+    color: var(--ink); background: #fffaf0; border: 3px solid var(--ink);
+    box-shadow: 0 4px 0 var(--ink);
+  }
+  .round:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+  #btnWish svg { fill: #ffd25e; }
+  #btnCalc svg rect:first-child { fill: #bfe7ff; }
+  #tray { background: #fffaf0; border: 3px solid var(--ink); border-radius: 26px; box-shadow: 0 4px 0 var(--ink); padding: 8px 10px; }
+  .money img { filter: drop-shadow(0 2px 0 rgba(91,70,54,.35)); }
+  #toast { background: #fffaf0; border: 3px solid var(--ink); color: var(--ink); box-shadow: 0 6px 0 var(--ink); }
+  .sheet .panel { background: #fffaf0; border: 3px solid var(--ink); color: var(--ink); }
+  .sheet .panel button { background: #ffe9b8; border: 2.5px solid var(--ink); }
+</style>
+</head>
+<body>
+  <svg class="deco sun" viewBox="0 0 100 100" aria-hidden="true">
+    <g stroke="#5b4636" stroke-width="3" stroke-linecap="round" fill="none">
+      <path d="M50 8v10M50 82v10M8 50h10M82 50h10M20 20l7 7M73 73l7 7M20 80l7-7M73 27l7-7"/>
+    </g>
+    <circle cx="50" cy="50" r="22" fill="#ffd25e" stroke="#5b4636" stroke-width="3"/>
+    <path d="M41 53q9 8 18 0" stroke="#5b4636" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="42" cy="45" r="2.6" fill="#5b4636"/><circle cx="58" cy="45" r="2.6" fill="#5b4636"/>
+  </svg>
+  <svg class="deco cloud" viewBox="0 0 80 44" aria-hidden="true">
+    <path d="M14 38q-12 0-11-11t12-9q2-13 16-13t17 12q4-6 12-3t6 11q10 1 9 8t-10 5z" fill="#fff" stroke="#5b4636" stroke-width="2.6" stroke-linejoin="round"/>
+  </svg>
+  <div class="deco grass"></div>
+  <canvas id="stage"></canvas>
+  <header id="top"><div id="title"></div></header>
+  <div id="dots"></div>
+  <footer id="bottom">
+    <div class="side left">
+      <button id="btnWish" class="round" aria-label="願望清單"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z"/></svg></button>
+      <button id="btnCalc" class="round" aria-label="計算機"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="3"/><rect x="8" y="5.5" width="8" height="4" rx="1" fill="#fff"/><path d="M8.6 13.2h.1M12 13.2h.1M15.4 13.2h.1M8.6 17h.1M12 17h.1M15.4 17h.1" stroke-width="2.6"/></svg></button>
+    </div>
+    <div id="tray"></div>
+    <div class="side right">
+      <button id="btnSettings" class="round" aria-label="設定"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></button>
+    </div>
+  </footer>
+  <div id="toast"></div>
+  <div id="sheet" class="sheet">
+    <div class="panel">
+      <button data-act="empty">🫙 清空這個罐子</button>
+      <button data-act="reset">↺ 恢復示範金額</button>
+      <a href="index.html">← 回到三種風格</a>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+  <script src="shared/engine.js"></script>
+  <script>
+    PiggyProto.start({
+      crayon: true,
+      ink: '#5b4636', lw: 3.4, rough: 0.7,
+      fillAlpha: 0.32, backAlpha: 0.12,
+      shadow: 'rgba(120,90,60,0.2)', dark: '#4a3426', slotRim: '#f3e6cc',
+      coinInk: '#5b4636', coinLw: 1.7,
+      common: { inner: '#ffb3c1', blush: '#ff8fa6', tire: '#5b4636', hub: '#f3ead8', light: '#ffe680', window: '#bfe7ff', lid: '#f0c85a', tag: '#ff8fa6' },
+      colors: {
+        red: { main: '#ff8c8c' }, yellow: { main: '#ffd25e' }, sky: { main: '#7cc6f2' },
+        blue: { main: '#6aa9ff' }, glass: { main: '#c4ecf7' },
+      },
+    });
+  </script>
+</body>
+</html>

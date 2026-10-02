@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="存錢罐">
+<meta name="theme-color" content="#fbf3e6">
+<title>存錢罐</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></svg>
+  <canvas id="bg"></canvas>
+  <canvas id="stage"></canvas>
+  <header id="top"><div id="title"></div></header>
+  <button id="newJar" aria-label="換新罐子"></button>
+  <div id="dots"></div>
+  <footer id="bottom">
+    <div class="side left">
+      <button id="btnWish" class="round" aria-label="願望清單"></button>
+      <button id="btnCalc" class="round" aria-label="計算機"></button>
+    </div>
+    <div class="side right">
+      <button id="kidBtn" class="round" aria-label="換小朋友" hidden></button>
+      <button id="btnSettings" class="round" aria-label="家長設定（按住）"></button>
+    </div>
+  </footer>
+  <div id="toast"></div>
+  <div id="parent" class="sheet"><div class="panel"></div></div>
+  <div id="picker" class="sheet pick"><div class="panel"></div></div>
+  <div id="kids" class="sheet pick"><div class="panel"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
